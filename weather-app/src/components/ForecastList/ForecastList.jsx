@@ -1,11 +1,11 @@
-import WeatherItem from '../WeatherItem/WeatherItem.jsx';
+import ForecastItem from '../ForecastItem/ForecastItem.jsx';
 
-const WeatherList = ({list}) => {
+const ForecastList = ({list}) => {
     const weatherList = list.map(item => {
-        return(<DetailedWeatherItem item={item}/>)
+        return(<ForecastItem item={item}/>)
     });
 
     return(<>{weatherList}</>)
 }
 
-export default WeatherList;
+export default ForecastList;

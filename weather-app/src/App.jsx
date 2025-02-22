@@ -1,15 +1,13 @@
 
 import './App.css'
-import WeatherContainer from './containers/ForecastContainer'
-import WeatherItem from './components/WeatherItem/WeatherItem'
 import Weather from './containers/Weather'
+import ForecastContainer from './containers/ForecastContainer'
 
 function App() {
 
   return (
     <>
-
-      <Weather/>
+      <ForecastContainer/>
     </>
   )
 }

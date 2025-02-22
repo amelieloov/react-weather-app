@@ -7,8 +7,8 @@ const WeatherItem = ({item}) => {
     return (
         <>
             <div className="startIcon">
-                <h2>{item.name}</h2>
-                <h3>{item?.main?.temp}℃</h3>
+                <h2>{item.location.name}</h2>
+                <h3>{item?.current?.temp_c}℃</h3>
                 <p>{currentDateTime}</p>
             </div>
         </>
