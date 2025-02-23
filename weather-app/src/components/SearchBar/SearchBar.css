@@ -1,0 +1,8 @@
+.searchBar{
+    width: 300px;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 25px;
+    background-color:cornflowerblue;
+    border: 2px solid gray;
+}

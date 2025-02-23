@@ -1,30 +1,29 @@
-import { useState, useRef } from "react";
-import GetForecast from '../../services/GetForecast.js';
-import ForecastContainer from "../../containers/ForecastContainer.jsx";
+import { useState } from "react";
+import './SearchBar.css';
 
-const SearchBar = () => {
-    const[searchResults, setSearchResults] = useState([]);
-    const searchRef = useRef();
+const SearchBar = ({onSearch}) => {
+    const[inputValue, setInputValue] = useState([]);
+    //const searchRef = useRef();
 
-    const handleSearch = () => {
-        setSearchResults([]);
-        const condition = searchRef.current.value;
+    const handleSearch = (e) => {
+        if (e.key === "Enter"){
+            onSearch(inputValue)
+            setInputValue("");
+            //const condition = searchRef.current.value;
+            //setSearchResults(<ForecastContainer city={condition}/>);
+        }
+    }
 
-        // GetForecast(condition).then(data => {
-        //     setSearchResults(data.forecast.forecastday)
-        // })
-
-        setSearchResults(<ForecastContainer city={condition}/>);
+    const handleChange = (e) => {
+        setInputValue(e.target.value);
     }
 
     return(
     <>
         <div>
-            <input type="text" ref={searchRef} placeholder="Enter a city"/>
-            <button onClick={handleSearch}>Search</button>
+            <input onKeyDown={handleSearch} className="searchBar" type="text" value={inputValue} onChange={handleChange} placeholder=" 🔍 Sök och välj stad"/>
         </div>
-        {searchResults}
-        {/* <ForecastContainer city={condition}/> */}
+        {/* {searchResults} */}
     </>
     )
 }

@@ -1,5 +1,9 @@
 .forecastListStyle{
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 16px;
+    width: 100%;
 }

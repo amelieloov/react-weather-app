@@ -2,15 +2,14 @@
 import './App.css'
 import Weather from './containers/Weather'
 import ForecastContainer from './containers/ForecastContainer'
-import SearchBar from './components/SearchBar/SearchBar.jsx'
+import FavoriteButton from './components/FavoriteButton/FavoriteButton'
 
 function App() {
 
   return (
     <>
       <Weather/>
-      <SearchBar/>
-      {/* <ForecastContainer city="Stockholm"/> */}
+      <ForecastContainer city="Stockholm"/>
     </>
   )
 }
