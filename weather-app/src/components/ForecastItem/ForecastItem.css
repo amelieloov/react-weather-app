@@ -1,3 +1,11 @@
 .forecastStyle{
-    background-color: blue;
+
+    background-color: navy;
+    width: 150px;
+    height: 290px;
+    border: 2px solid gray;
+}
+
+h1{
+    font-size: 30px;
 }

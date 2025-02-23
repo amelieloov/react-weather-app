@@ -1,16 +1,17 @@
-import { getCurrentDateTime } from "../../utils/dateUtils";
+import { formatDate } from "../../utils/dateUtils";
+import { formatWeekday } from "../../utils/dateUtils";
 import './ForecastItem.css';
 
 const DetailedWeatherItem = ({item}) => {
-    const currentDateTime = getCurrentDateTime();
+    const currentDateTime = formatDate();
     
     return(
     <>
         <div className="forecastStyle">
-            <h2>Temperature max/min</h2>
-            <h2>{item?.day?.maxtemp_c}</h2>
-            <h2>{item?.day?.mintemp_c}</h2>
-            <p>{currentDateTime}</p>
+            <p>{formatWeekday(item?.date)}</p>
+            <p>{formatDate(item?.date)}</p>
+            <h1>{item?.day?.maxtemp_c}℃</h1>
+            <h5>{item?.day?.mintemp_c}℃ min</h5>
             <img src={item.day.condition.icon} alt="nope" />
         </div>
     </>
