@@ -1,14 +1,5 @@
-/* .forecast-container{
-    padding: 50px;
-    border: 2px solid white;
-} */
-
 .upper-part{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.searchBar{
-
 }
