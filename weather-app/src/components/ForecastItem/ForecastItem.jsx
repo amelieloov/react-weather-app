@@ -3,7 +3,6 @@ import { formatWeekday } from "../../utils/dateUtils";
 import './ForecastItem.css';
 
 const DetailedWeatherItem = ({ item }) => {
-    const currentDateTime = formatDate();
 
     return (
         <>

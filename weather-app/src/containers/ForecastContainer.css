@@ -1,5 +1,23 @@
 .upper-part{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+}
+
+h1{
+    margin: 1rem;
+}
+
+@media (min-width: 768px){
+    .upper-part{
+        align-items: center;
+    }
+}
+
+@media (min-width: 1024px){
+    .upper-part{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }

@@ -1,16 +1,13 @@
-/* .startIcon{
-
-    background: rgba(255, 255, 255, 0.2);
-    padding: 20px;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    text-align: center;
-    width: 200px;
-} */
+.startIcon{
+    display: grid;
+    place-items: center;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+}
 
 
-h1{
-    font-size: 50px;
+h4{
+    font-size: 45px;
     margin: 0%;
 }
 

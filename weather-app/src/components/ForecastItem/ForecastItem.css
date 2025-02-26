@@ -1,14 +1,15 @@
 .forecastStyle{
     display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    background: rgba(255, 255, 255, 0.2);
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    /* background: rgba(255, 255, 255, 0.05); */
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    /* background-color: cornflowerblue; */
-    width: 9rem;
-    height: 16rem;
+    width: 18rem;
+    height: 6rem;
     border: 2px solid gray;
-    padding-top: 20px;
+
 }
 
 h1{
@@ -22,3 +23,31 @@ h3{
 p{
     font-size: 20px;
 }
+
+@media (min-width: 350px){
+    .forecastStyle{
+        width: 20rem;
+    }
+}
+
+@media (min-width: 767px){
+    .forecastStyle{
+        width: 35rem;
+    }
+}
+
+@media (min-width: 1024px){
+    .forecastStyle{
+        width: 10rem;
+        height: 15rem;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .date-desktop{
+        display: block;
+    }
+}
+
