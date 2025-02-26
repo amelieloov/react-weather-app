@@ -44,46 +44,47 @@
 
 
 
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import ForecastList from '../components/ForecastList/ForecastList.jsx';
 import GetForecast from '../services/GetForecast';
 import SearchBar from '../components/SearchBar/SearchBar.jsx';
 import './ForecastContainer.css';
+import GetWeather from '../services/GetWeather.js';
 
 const ForecastContainer = () => {
     const [weatherList, setWeatherList] = useState([]);
-    const [location, setLocation] = useState("Stockholm");
+    const [location, setLocation] = useState("");
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchForecast(location);
+        GetWeather(5).then(data => { setWeatherList(data.forecast.forecastday), setLocation(data.location.name); });
     }, []);
 
     const handleSearch = (newCity) => {
-        fetchForecast(newCity);
+        fetchForecast(newCity, 5);
     }
 
-    const fetchForecast = async (city) => {
+    const fetchForecast = async (city, days) => {
         try {
-            const data = await GetForecast(city);;
+            const data = await GetForecast(city, days);;
             setWeatherList(data.forecast.forecastday);
             setLocation(data.location.name);
             setError(null);
         }
-        catch(err){
+        catch (err) {
             setError(err.message);
         }
     }
 
     console.log("State:", weatherList);
 
-    return(<div className="forecast-container">
+    return (<div className="forecast-container">
         <div className="upper-part">
-            <SearchBar className="searchBar" onSearch={handleSearch} error={error}/>
+            <SearchBar className="searchBar" onSearch={handleSearch} error={error} />
             <h1>Väder i {location}</h1>
         </div>
-            <ForecastList list={weatherList}/>
-        </div>)
+        <ForecastList list={weatherList} />
+    </div>)
 }
 
 export default ForecastContainer;

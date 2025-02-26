@@ -11,6 +11,8 @@ const ForecastList = ({list}) => {
         return(<ForecastItem item={item} key={crypto.randomUUID()}/>)
     });
 
+    console.log("in forecastlist", weatherList);
+
     return(<div className="forecastListStyle">{weatherList}</div>)
 }
 

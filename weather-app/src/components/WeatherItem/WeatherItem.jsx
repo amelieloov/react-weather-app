@@ -1,4 +1,4 @@
-import {formatDate} from '../../utils/dateUtils';
+
 import { formatDateWithTime } from '../../utils/dateUtils';
 import './WeatherItem.css'
 
