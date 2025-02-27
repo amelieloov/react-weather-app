@@ -44,7 +44,7 @@
 // export default GetWeather;
 
 
-const GetWeather = (days) => {
+const GetForecastByLatLon = (days) => {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
@@ -69,4 +69,4 @@ const GetWeather = (days) => {
     });
 };
 
-export default GetWeather;
+export default GetForecastByLatLon;

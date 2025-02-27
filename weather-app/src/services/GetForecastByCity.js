@@ -1,5 +1,5 @@
 
-const GetForecast = async ({city, days}) => {
+const GetForecastByCity = async (city, days) => {
     try {
         const url = `https://api.weatherapi.com/v1/forecast.json?key=69d842903d3447848df200938252202&q=${city}&days=${days}`;
 
@@ -19,7 +19,7 @@ const GetForecast = async ({city, days}) => {
     }
 }
 
-export default GetForecast;
+export default GetForecastByCity;
 
 
 

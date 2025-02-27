@@ -1,6 +1,6 @@
 
 import './App.css'
-import Weather from './containers/Weather'
+import Weather from './containers/CurrentWeather'
 import ForecastContainer from './containers/ForecastContainer'
 
 function App() {

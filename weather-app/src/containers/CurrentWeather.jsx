@@ -1,6 +1,6 @@
 import WeatherItem from "../components/WeatherItem/WeatherItem";
 import {useState, useEffect} from 'react';
-import GetWeather from "../services/GetWeather";
+import GetForecastByLatLon from "../services/GetForecastByLatLon";
 import GetCurrentWeather from "../services/GetCurrentWeather";
 
 const Weather = () => {
@@ -12,8 +12,6 @@ const Weather = () => {
             setWeather(data)
         });
     }, []);
-    
-    console.log("State:", weather);
 
     return (<WeatherItem item={weather}/>)
 }
