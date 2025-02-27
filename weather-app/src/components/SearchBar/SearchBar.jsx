@@ -2,9 +2,9 @@ import './SearchBar.css';
 import { useState,  useContext } from "react";
 import { WeatherContext } from '../../context/WeatherContext.jsx';
 
-const SearchBar = () => {
+const SearchBar = ({handleSearch, fetchError, onFocus, onBlur}) => {
     const [inputValue, setInputValue] = useState("");
-    const {handleSearch, fetchError, onFocus, onBlur} = useContext(WeatherContext);
+    // const {handleSearch, fetchError, onFocus, onBlur} = useContext(WeatherContext);
 
     const search = (e) => {
         if (e.key === "Enter") {
