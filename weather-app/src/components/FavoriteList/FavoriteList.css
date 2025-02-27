@@ -1,22 +1,39 @@
 .favorite-list{
+    display: flex;
     position: absolute;
     background: gray;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     z-index: 1000;
-    top: 100%;
     left: 0;
     right: 0;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-height: 230px;
     overflow-y: auto;
 }
 
-.favorite-item{
-    padding: 10px;
-    background-color: aqua;
-    transition: background 0.2s ease-in-out;
-    font-size: 1.2rem;
+h3{
+    font-size: 1.1rem;
 }
 
-.favorite-item :hover{
-    background: blue;
+.favorite-info{
+    padding: 0.8rem;
 }
+
+.favorite-item{
+    background: gray;
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    list-style-type: none;
+
+}
+
+.favorite-item:hover{
+    background: darkgray;
+}
+

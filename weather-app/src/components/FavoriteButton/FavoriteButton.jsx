@@ -1,10 +1,9 @@
 import './FavoriteButton.css';
-import { useState } from 'react';
 
-const FavoriteButton = ({handleAddFavorite}) => {
+const FavoriteButton = ({handleAddFavorite, isFavorite}) => {
 
     return(
-        <button onClick={handleAddFavorite}>Fave</button>
+        <button onClick={handleAddFavorite}>{isFavorite ? "♥" : "♡"}</button>
     )
 }
 

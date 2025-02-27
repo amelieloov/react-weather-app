@@ -1,39 +1,33 @@
-.upper-part{
+.upper-part {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-.input-container{
-    position: relative;
+.input-container {
+    /* position: relative; */
+    display: flex;
+    align-items: center;
 }
 
-/* .favoriteList{
-    position: absolute;
-    background: gray;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    z-index: 1000;
-    top: 100%;
-    left: 0;
-    right: 0;
-    overflow-y: auto;
-} */
+.search-container {
+    position: relative; /* Makes sure the dropdown is positioned correctly */
+    flex: 1; /* Allows the search bar to take up available space */
+}
 
-h1{
+h1 {
     margin: 1rem;
 }
 
-@media (min-width: 768px){
-    .upper-part{
+@media (min-width: 768px) {
+    .upper-part {
         align-items: center;
+        flex-direction: row;
     }
 }
 
-@media (min-width: 1024px){
-    .upper-part{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+@media (min-width: 1024px) {
+
+    .right-side-text {
+        margin-left: auto;
     }
 }

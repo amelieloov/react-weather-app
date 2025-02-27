@@ -14,29 +14,37 @@ const ForecastContainer = () => {
     const [error, setError] = useState(null);
     const [favorites, setFavorites] = useState([]);
     const [showList, setShowList] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
 
     useEffect(() => {
-        GetForecastByLatLon(5).then(data => { 
-            setWeatherList(data.forecast.forecastday), 
-            setLocation(data.location.name); });
+        GetForecastByLatLon(5).then(data => {
+            setWeatherList(data.forecast.forecastday),
+                setLocation(data.location.name);
+        });
     }, []);
 
-    const handleAddFavorite = () =>{
-        if(favorites.includes(location)){
+    const handleAddFavorite = () => {
+        if (favorites.includes(location)) {
             setFavorites((prev) => prev.filter(fave => fave !== location));
+            setIsFavorite(false);
         } else {
             setFavorites([...favorites, location]);
+            setIsFavorite(true);
         }
     }
 
     const handleListItemClick = (city) => {
         fetchForecast(city, 5);
         setShowList(false);
+
+        (favorites.includes(city) ? setIsFavorite(true) : setIsFavorite(false))
     }
 
     const handleSearch = (newCity) => {
         fetchForecast(newCity, 5);
         setShowList(false);
+
+        (favorites.includes(newCity) ? setIsFavorite(true) : setIsFavorite(false))
     }
 
     const fetchForecast = async (city, days) => {
@@ -54,13 +62,15 @@ const ForecastContainer = () => {
     return (<div className="forecast-container">
         <div className="upper-part">
             <div className="input-container">
-                <SearchBar className="searchBar" onBlur={() => setTimeout(() => setShowList(false), 100)} onFocus={() => setShowList(true)}
-                 onSearch={handleSearch} error={error} />
-                {showList && <FavoriteList handleListItemClick={handleListItemClick} className="favoriteList" 
-                favoriteList={favorites ? favorites : [{testitem}]}/>}
+                <div className="search-container">
+                    <SearchBar onBlur={() => setTimeout(() => setShowList(false), 100)} onFocus={() => setShowList(true)}
+                        onSearch={handleSearch} error={error} />
+                    {showList && <FavoriteList className="dropdown" handleListItemClick={handleListItemClick}
+                        favoriteList={favorites} />}
+                </div>
+                <FavoriteButton handleAddFavorite={handleAddFavorite} isFavorite={isFavorite} />
             </div>
-            <h1>Väder i {location}</h1>
-            <FavoriteButton handleAddFavorite={handleAddFavorite}/>
+            <h1 className="right-side-text">Väder i {location}</h1>
         </div>
         <ForecastList list={weatherList} />
     </div>)
