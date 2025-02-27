@@ -1,9 +1,9 @@
 import './FavoriteButton.css';
 
-const FavoriteButton = ({handleAddFavorite, isFavorite}) => {
+const FavoriteButton = ({toggleFavorite, isFavorite}) => {
 
     return(
-        <button onClick={handleAddFavorite}>{isFavorite ? "♥" : "♡"}</button>
+        <button onClick={toggleFavorite}>{isFavorite ? "♥" : "♡"}</button>
     )
 }
 

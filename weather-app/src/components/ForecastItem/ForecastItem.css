@@ -37,7 +37,7 @@ p{
 @media (min-width: 1024px){
     .forecastStyle{
         width: 10rem;
-        height: 15rem;
+        height: 13.7rem;
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(3, 1fr);
         padding-top: 1rem;

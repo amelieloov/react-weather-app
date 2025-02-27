@@ -10,8 +10,8 @@
 }
 
 .search-container {
-    position: relative; /* Makes sure the dropdown is positioned correctly */
-    flex: 1; /* Allows the search bar to take up available space */
+    position: relative;
+    flex: 1;
 }
 
 h1 {
