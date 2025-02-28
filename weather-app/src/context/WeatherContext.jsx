@@ -1,7 +1,4 @@
 import { createContext, useState } from 'react';
-import GetForecastByCity from '../services/GetForecastByCity.js';
-import GetForecastByLatLon from '../services/GetForecastByLatLon.js';
-import GetCurrentWeather from '../services/GetCurrentWeather.js';
 
 export const WeatherContext = createContext();
 
@@ -20,10 +17,15 @@ export const WeatherProvider = ({ children }) => {
         weatherList, 
         setWeatherList,
         location, 
+        setLocation,
         fetchError, 
+        setFetchError,
         favorites, 
-        isFavorite, 
+        setFavorites,
+        isFavorite,
+        setIsFavorite, 
         showList,
+        setShowList
     }}>
         {children}
     </WeatherContext.Provider>)

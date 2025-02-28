@@ -1,17 +1,28 @@
+.left-side {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-wrapper{
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
 .upper-part {
     display: flex;
     flex-direction: column;
-}
-
-.input-container {
-    /* position: relative; */
-    display: flex;
     align-items: center;
 }
 
-.search-container {
-    position: relative;
-    flex: 1;
+.right-side {
+    display: flex;
+    align-items: center;
+    max-width: 70%;
 }
 
 h1 {

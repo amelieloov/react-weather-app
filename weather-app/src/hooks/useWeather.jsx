@@ -1,32 +1,51 @@
-import {useState} from 'react';
-import GetForecastByCity from '../services/GetForecastByCity.js';
-import GetForecastByLatLon from '../services/GetForecastByLatLon.js';
+import {useContext, useEffect} from 'react';
+import { GetForecastByLatLon, GetLatLonByCityName, GetUserPosition } from '../services/WeatherService.js';
 
 const useWeather = () => {
 
-    const [weatherList, setWeatherList] = useState([]);
-    const [location, setLocation] = useState("");
-    const [error, setError] = useState(null);
 
-    const fetchForecast = async (city, days) => {
+    useEffect(() => {
+
+        const fetchForecast = async () => {
+            try {
+                const { lat, lon } = await GetUserPosition();
+                fetchForecastByLatLon({ lat, lon });
+            } catch (error) {
+                console.error("Failed to get user position/weather data:", error);
+            }
+        };
+
+        fetchForecast();
+
+    }, []);
+
+    const fetchForecastByLatLon = async ({ lat, lon }) => {
+
         try {
-            const data = await GetForecastByCity(city, days);;
-            setWeatherList(data.forecast.forecastday);
-            setLocation(data.location.name);
-            setError(null);
+            const data = await GetForecastByLatLon({ lat, lon });
+            setWeatherList(data.list.filter((_, index) => index % 8 === 0));
+            setLocation(data.city.name);
+            setFetchError(null);
         }
         catch (err) {
-            setError(err.message);
+            setFetchError(err.message);
         }
     }
 
-    const fetchForecastByLatLon = async () => {
-        GetForecastByLatLon(5).then(data => {
-            setWeatherList(data.forecast.forecastday),
-                setLocation(data.location.name);
-        })}
+    const handleSearch = async (newCity) => {
 
-    return {weatherList, location, error, fetchForecast, fetchForecastByLatLon};
+        const coords = await GetLatLonByCityName(newCity);
+        if (coords) {
+            const { lat, lon } = coords;
+            fetchForecastByLatLon({ lat, lon });
+        }
+
+        setShowList(false);
+
+        (favorites.includes(newCity) ? setIsFavorite(true) : setIsFavorite(false))
+    }
+
+    return {handleSearch, };
 }
 
 export default useWeather;

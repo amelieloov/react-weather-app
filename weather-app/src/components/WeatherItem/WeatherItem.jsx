@@ -6,9 +6,9 @@ const WeatherItem = ({item}) => {
     return (
         <>
             <div className="startIcon">
-                <h4>{item?.location?.name}</h4>
-                <h2>{item?.current?.temp_c}℃</h2>
-                <p>{formatDateWithTime(item?.location?.localtime)}</p>
+                <h4>{item?.name}</h4>
+                <h2>{item?.main?.temp}℃</h2>
+                <p>{formatDateWithTime(item?.dt)}</p>
             </div>
         </>
     )

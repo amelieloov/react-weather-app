@@ -1,59 +1,58 @@
 
-import './WeatherContainer.css';
-import { useState, useEffect } from 'react';
+import {useContext, useEffect} from 'react';
 
-import ForecastList from '../components/ForecastList/ForecastList.jsx';
-import SearchBar from '../components/SearchBar/SearchBar.jsx';
-import FavoriteButton from '../components/FavoriteButton/FavoriteButton.jsx';
-import FavoriteList from '../components/FavoriteList/FavoriteList.jsx';
-import GetForecastByCity from '../services/GetForecastByCity.js';
-import GetForecastByLatLon from '../services/GetForecastByLatLon.js';
+import { GetForecastByLatLon, GetLatLonByCityName, GetUserPosition } from '../services/WeatherService.js';
+
+import { WeatherContext } from '../context/WeatherContext.jsx';
+import WeatherUI from '../components/WeatherUI/WeatherUI.jsx';
 
 
 const WeatherContainer = () => {
 
-    const [weatherList, setWeatherList] = useState([]);
-    const [location, setLocation] = useState("");
-    const [fetchError, setFetchError] = useState(null);
-    const [favorites, setFavorites] = useState([]);
-    const [showList, setShowList] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const {setWeatherList, setLocation, favorites, setShowList, setIsFavorite, setFetchError} = useContext(WeatherContext);
 
     useEffect(() => {
-        fetchForecastByLatLon(5);
+
+        const fetchForecast = async () => {
+            try {
+                const { lat, lon } = await GetUserPosition();
+                fetchForecastByLatLon({ lat, lon });
+            } catch (error) {
+                fetchForecastByLatLon({ lat: 59.334591, lon: 18.063240 });
+                console.error("Failed to get user position/weather data:", error);
+            }
+        };
+
+        fetchForecast();
+
     }, []);
 
-    const fetchForecastByCity = async (city, days) => {
+    const fetchForecastByLatLon = async ({ lat, lon }) => {
+
         try {
-            const data = await GetForecastByCity(city, days);;
-            setWeatherList(data.forecast.forecastday);
-            setLocation(data.location.name);
+            const data = await GetForecastByLatLon({ lat, lon });
+
+            setWeatherList(data.list.filter((_, index) => index % 8 === 0));
+            setLocation(data.city.name);
             setFetchError(null);
         }
         catch (err) {
             setFetchError(err.message);
         }
-    }
+    } 
 
-    const fetchForecastByLatLon = async (days) => {
-        GetForecastByLatLon(days).then(data => {
-            setWeatherList(data.forecast.forecastday),
-                setLocation(data.location.name);
-        })
-    }
+    const handleSearch = async (newCity) => {
 
-    const toggleFavorite = () => {
-        if (favorites.includes(location)) {
-            setFavorites((prev) => prev.filter(fave => fave !== location));
-            setIsFavorite(false);
-        } else {
-            setFavorites([...favorites, location]);
-            setIsFavorite(true);
+        const coords = await GetLatLonByCityName(newCity);
+        if (coords) {
+            const { lat, lon } = coords;
+            fetchForecastByLatLon({ lat, lon });
+            setFetchError(false);
         }
-    }
+        else{
+            setFetchError(true);
+        }
 
-    const handleSearch = (newCity) => {
-        fetchForecastByCity(newCity, 5);
         setShowList(false);
 
         (favorites.includes(newCity) ? setIsFavorite(true) : setIsFavorite(false))
@@ -63,19 +62,7 @@ const WeatherContainer = () => {
 
     const onFocus = () => setShowList(true);
 
-    return (<div className="forecast-container">
-        <div className="upper-part">
-            <div className="input-container">
-                <div className="search-container">
-                    <SearchBar handleSearch={handleSearch} fetchError={fetchError} onFocus={onFocus} onBlur={onBlur} />
-                    {showList && <FavoriteList className="dropdown" favorites={favorites} handleSearch={handleSearch} />}
-                </div>
-                <FavoriteButton toggleFavorite={toggleFavorite} isFavorite={isFavorite} />
-            </div>
-            <h1 className="right-side-text">Väder i {location}</h1>
-        </div>
-        <ForecastList list={weatherList} />
-    </div>)
+    return (<WeatherUI handleSearch={handleSearch} onBlur={onBlur} onFocus={onFocus}/>);
 }
 
 export default WeatherContainer;

@@ -1,19 +1,14 @@
 
 import './App.css'
-import WeatherHeader from './containers/WeatherHeader.jsx';
 import WeatherContainer from './containers/WeatherContainer.jsx';
+import { WeatherProvider } from './context/WeatherContext.jsx';
 
 function App() {
 
   return (
-    <>
-      <header>
-        <WeatherHeader />
-      </header>
-      <main>
+    <WeatherProvider>
         <WeatherContainer />
-      </main>
-    </>
+    </WeatherProvider>
   )
 }
 

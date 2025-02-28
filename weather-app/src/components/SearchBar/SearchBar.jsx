@@ -1,10 +1,8 @@
 import './SearchBar.css';
-import { useState,  useContext } from "react";
-import { WeatherContext } from '../../context/WeatherContext.jsx';
+import { useState } from "react";
 
 const SearchBar = ({handleSearch, fetchError, onFocus, onBlur}) => {
     const [inputValue, setInputValue] = useState("");
-    // const {handleSearch, fetchError, onFocus, onBlur} = useContext(WeatherContext);
 
     const search = (e) => {
         if (e.key === "Enter") {
@@ -20,7 +18,7 @@ const SearchBar = ({handleSearch, fetchError, onFocus, onBlur}) => {
     return (
         <>
             <input onKeyDown={search} className="searchBar" type="text" value={inputValue}
-                onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder={fetchError ? "Plats ej funnen" : "Sök på plats"} />
+                onChange={handleChange} onFocus={onFocus} onBlur={onBlur} placeholder={fetchError ? "Inga resultat" : "Sök på plats"} />
         </>
     )
 }

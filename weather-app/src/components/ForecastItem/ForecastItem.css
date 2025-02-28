@@ -42,10 +42,16 @@ p{
         grid-template-rows: repeat(3, 1fr);
         padding-top: 1rem;
         padding-bottom: 1rem;
+        position: relative;
     }
     
     .date-desktop{
         display: block;
+    }
+
+    .icon{
+        position: relative;
+        top: -25px;
     }
 }
 
