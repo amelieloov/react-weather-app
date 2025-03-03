@@ -1,10 +1,15 @@
 import FavoriteButton from "../components/FavoriteButton/FavoriteButton";
 import { WeatherContext } from "../context/WeatherContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const FavoritesContainer = () => {
 
-    const {location, favorites, isFavorite, setFavorites, setIsFavorite} = useContext(WeatherContext);
+    const {location, favorites, isFavorite, setFavorites, setIsFavorite} = useContext(WeatherContext)
+
+    useEffect(() => {
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
+    }, [favorites, isFavorite]);
 
     const toggleFavorite = () => {
         if (favorites.includes(location)) {

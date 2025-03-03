@@ -3,17 +3,21 @@ import { createContext, useState } from 'react';
 export const WeatherContext = createContext();
 
 export const WeatherProvider = ({ children }) => {
-    const [currentWeather, setCurrentWeather] = useState({});
     const [weatherList, setWeatherList] = useState([]);
     const [location, setLocation] = useState("");
     const [fetchError, setFetchError] = useState(null);
-    const [favorites, setFavorites] = useState([]);
     const [showList, setShowList] = useState(false);
-    const [isFavorite, setIsFavorite] = useState(false);
-
+    
+    const [isFavorite, setIsFavorite] = useState(() => {
+        const savedIsFavorite = localStorage.getItem("isFavorite");
+        return savedIsFavorite ? JSON.parse(savedIsFavorite) : false;
+    });
+    const [favorites, setFavorites] = useState(() => {
+        const savedFavorites = localStorage.getItem("favorites");
+        return savedFavorites ? JSON.parse(savedFavorites) : [];
+    });
+    
     return (<WeatherContext.Provider value={{
-        currentWeather,
-        setCurrentWeather,
         weatherList, 
         setWeatherList,
         location, 

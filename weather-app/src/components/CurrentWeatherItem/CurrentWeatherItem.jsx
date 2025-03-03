@@ -1,8 +1,8 @@
 
 import { formatDateWithTime } from '../../utils/dateUtils';
-import './WeatherItem.css'
+import './CurrentWeatherItem.css'
 
-const WeatherItem = ({item}) => {
+const CurrentWeatherItem = ({item}) => {
     return (
         <>
             <div className="startIcon">
@@ -14,4 +14,4 @@ const WeatherItem = ({item}) => {
     )
 }
 
-export default WeatherItem;
+export default CurrentWeatherItem;

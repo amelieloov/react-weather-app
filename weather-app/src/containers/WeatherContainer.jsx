@@ -17,8 +17,10 @@ const WeatherContainer = () => {
             try {
                 const { lat, lon } = await GetUserPosition();
                 fetchForecastByLatLon({ lat, lon });
+                setFetchError(false);
             } catch (error) {
                 fetchForecastByLatLon({ lat: 59.334591, lon: 18.063240 });
+                setFetchError(true);
                 console.error("Failed to get user position/weather data:", error);
             }
         };
@@ -32,12 +34,12 @@ const WeatherContainer = () => {
         try {
             const data = await GetForecastByLatLon({ lat, lon });
 
-            setWeatherList(data.list.filter((_, index) => index % 8 === 0));
+            setWeatherList(data.list.filter(item => item.dt_txt.includes("12:00:00")));
             setLocation(data.city.name);
             setFetchError(null);
         }
-        catch (err) {
-            setFetchError(err.message);
+        catch (error) {
+            setFetchError(error.message);
         }
     } 
 
@@ -55,7 +57,7 @@ const WeatherContainer = () => {
 
         setShowList(false);
 
-        (favorites.includes(newCity) ? setIsFavorite(true) : setIsFavorite(false))
+        favorites.includes(newCity) ? setIsFavorite(true) : setIsFavorite(false)
     }
 
     const onBlur = () => setTimeout(() => setShowList(false), 100);

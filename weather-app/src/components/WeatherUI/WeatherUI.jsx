@@ -2,7 +2,6 @@
 import './WeatherUI.css';
 
 import ForecastList from '../ForecastList/ForecastList.jsx';
-import WeatherHeader from '../../containers/WeatherHeader.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import FavoriteList from '../FavoriteList/FavoriteList.jsx';
 import FavoritesContainer from '../../containers/FavoritesContainer.jsx';
@@ -15,7 +14,6 @@ const WeatherUI = ({handleSearch, onBlur, onFocus}) => {
     const {weatherList, location, fetchError, favorites, showList} = useContext(WeatherContext);
 
     return (<div>
-        <WeatherHeader></WeatherHeader>
         <div className="upper-part">
             <div className="left-side">
                 <div className="search-wrapper">

@@ -1,10 +1,9 @@
 body {
-  background-image: url('./images/pexels-simeon-theartist-13627290.jpg');
+  background-image: url('./images/weather-background.jpg');
   background-size: cover;
   background-position: center;
-  /* background: linear-gradient(to bottom, #87CEFA, #4682B4); */
-  color: white; /* Vit text för kontrast */
   background-attachment: fixed;
+  color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
