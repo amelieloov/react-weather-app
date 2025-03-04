@@ -8,11 +8,8 @@ export const WeatherProvider = ({ children }) => {
     const [fetchError, setFetchError] = useState(null);
     const [showList, setShowList] = useState(false);
     const [currentWeather, setCurrentWeather] = useState({});
-    
-    const [isFavorite, setIsFavorite] = useState(() => {
-        const savedIsFavorite = localStorage.getItem("isFavorite");
-        return savedIsFavorite ? JSON.parse(savedIsFavorite) : false;
-    });
+    const [isFavorite, setIsFavorite] = useState(false);
+
     const [favorites, setFavorites] = useState(() => {
         const savedFavorites = localStorage.getItem("favorites");
         return savedFavorites ? JSON.parse(savedFavorites) : [];

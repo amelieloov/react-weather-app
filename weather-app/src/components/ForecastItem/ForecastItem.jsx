@@ -1,5 +1,6 @@
 import { formatDate } from "../../utils/dateUtils";
 import { formatWeekday } from "../../utils/dateUtils";
+import getWeatherIcon from "../../utils/IconUtils";
 import './ForecastItem.css';
 
 const ForecastItem = ({ item }) => {
@@ -8,15 +9,15 @@ const ForecastItem = ({ item }) => {
         <>
             <div className="forecastStyle">
                 <div>
-                    <p>{formatWeekday(item?.dt_txt)}</p>
-                    <p>{formatDate(item?.dt_txt)}</p>
+                    <p>{formatWeekday(item?.date)}</p>
+                    <p>{formatDate(item?.date)}</p>
                 </div>
                 <div>
-                    <h1>{item?.main?.temp_max}℃</h1>
-                    <h3>{item?.main?.temp_min}℃ min</h3>
+                    <h1>{item?.maxTemp}℃</h1>
+                    <h3>{item?.minTemp}℃ min</h3>
                 </div>
                 <div className="icon">
-                    <img src={`https://openweathermap.org/img/wn/${item?.weather[0]?.icon}@2x.png`} alt="weather-icon" />
+                    <h2>{getWeatherIcon(item?.weatherCode)}</h2>
                 </div>
             </div>
         </>

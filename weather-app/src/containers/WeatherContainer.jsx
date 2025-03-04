@@ -1,7 +1,7 @@
 
-import {useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 
-import { GetCurrentWeather, GetForecastByLatLon } from '../services/WeatherService.js';
+import { GetCurrentWeather, GetForecastByLatLon, GetLatLonByCityName, GetUserPosition } from '../services/WeatherService.js';
 
 import { WeatherContext } from '../context/WeatherContext.jsx';
 import WeatherUI from '../components/WeatherUI/WeatherUI.jsx';
@@ -9,53 +9,52 @@ import WeatherUI from '../components/WeatherUI/WeatherUI.jsx';
 
 const WeatherContainer = () => {
 
-    const {weatherList, setWeatherList, setLocation, favorites, setShowList, setIsFavorite, setFetchError, setCurrentWeather} = useContext(WeatherContext);
+    const { setWeatherList, setLocation, favorites, setShowList, setIsFavorite, setFetchError, setCurrentWeather } = useContext(WeatherContext);
 
     useEffect(() => {
-        fetchWeather("London");
+        fetchWeather("Stockholm");
     }, [])
-
-    // useEffect(() => {
-    //     fetchForecast(location);
-    // }, [location]);
 
     const fetchWeather = async (city) => {
         try {
-            const forecastData = await GetForecastByLatLon(city);
-            console.log(forecastData);
-            const currentData = await GetCurrentWeather(city);
+            const {name, lat, lon} = await GetLatLonByCityName(city);
 
-            setLocation(forecastData.city.name);
-            setWeatherList(forecastData.list.filter(item => item.dt_txt.includes("12:00:00")));
-            console.log(weatherList);
-            setCurrentWeather(currentData);
-            //setWeatherList(data);
+            //Get current weather data
+            const currentData = await GetCurrentWeather({lat, lon});
+
+            //Get forecast data
+            const forecastData = await GetForecastByLatLon({lat, lon});
+            const forecast = [];
+              
+              for (let i = 0; i < 5; i++) {
+                const date = forecastData.daily.time[i];
+                const maxTemp = forecastData.daily.temperature_2m_max[i];
+                const minTemp = forecastData.daily.temperature_2m_min[i];
+                const weatherCode = forecastData.daily.weather_code[i];
+                forecast[i] = {date, maxTemp, minTemp, weatherCode};
+              };
+
+            setLocation(name);
+            setWeatherList(forecast);
+            setCurrentWeather(currentData.current);
             setFetchError(false);
+
+            favorites.includes(name) ? setIsFavorite(true) : setIsFavorite(false)
+
         } catch (error) {
             setFetchError(error.message);
-            console.error("Failed to get user position/weather data:", error);
+            console.error("Failed to get weather data:", error);
+        }
+        finally{
+            setShowList(false);
         }
     };
-
-    const handleSearch = async (city) => {
-
-        try{
-            fetchWeather(city);
-            setFetchError(false);
-        } catch{
-            setFetchError(true);
-        }
-
-        setShowList(false);
-
-        favorites.includes(location) ? setIsFavorite(true) : setIsFavorite(false)
-    }
 
     const onBlur = () => setTimeout(() => setShowList(false), 100);
 
     const onFocus = () => setShowList(true);
 
-    return (<WeatherUI handleSearch={handleSearch} onBlur={onBlur} onFocus={onFocus}/>);
+    return (<WeatherUI handleSearch={fetchWeather} onBlur={onBlur} onFocus={onFocus} />);
 }
 
 export default WeatherContainer;

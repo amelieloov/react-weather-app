@@ -1,13 +1,9 @@
 import './FavoriteList.css';
-import { useContext } from 'react';
-import { WeatherContext } from '../../context/WeatherContext';
 
 const FavoriteList = ({favorites, handleSearch}) => {
 
-    //const {favorites, handleSearch} = useContext(WeatherContext);
-
     const faveList = favorites.map(favorite => {
-        return <li className="favorite-item" key={favorite} onClick={() => handleSearch(favorite)}>{favorite}</li>
+        return <li className="favorite-item" key={favorite} onMouseDown={() => handleSearch(favorite)}>{favorite}</li>
     });
 
     return (

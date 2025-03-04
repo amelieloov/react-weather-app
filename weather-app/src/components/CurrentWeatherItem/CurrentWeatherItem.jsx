@@ -2,13 +2,13 @@
 import { formatDateWithTime } from '../../utils/dateUtils';
 import './CurrentWeatherItem.css'
 
-const CurrentWeatherItem = ({item}) => {
+const CurrentWeatherItem = ({item, location}) => {
     return (
         <>
             <div className="startIcon">
-                <h4>{item?.name}</h4>
-                <h2>{item?.main?.temp}℃</h2>
-                <p>{formatDateWithTime(item?.dt)}</p>
+                <h4>{location}</h4>
+                <h2>{item?.temperature_2m}℃</h2>
+                <p>{formatDateWithTime(item?.time)}</p>
             </div>
         </>
     )

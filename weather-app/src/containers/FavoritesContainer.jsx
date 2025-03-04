@@ -8,8 +8,7 @@ const FavoritesContainer = () => {
 
     useEffect(() => {
         localStorage.setItem("favorites", JSON.stringify(favorites));
-        localStorage.setItem("isFavorite", JSON.stringify(isFavorite));
-    }, [favorites, isFavorite]);
+    }, [favorites]);
 
     const toggleFavorite = () => {
         if (favorites.includes(location)) {

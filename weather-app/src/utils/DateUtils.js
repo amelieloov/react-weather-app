@@ -13,9 +13,9 @@ export const formatWeekday = (date) => {
     });
 }
 
-export const formatDateWithTime = (timestamp) => {
-    const date = new Date(timestamp * 1000); 
-    return date.toLocaleDateString("sv-SV", {
+export const formatDateWithTime = (date) => {
+    const date2 = new Date(date); 
+    return date2.toLocaleDateString("sv-SV", {
         month: "short",
         day: "numeric",
         hour12: false,
