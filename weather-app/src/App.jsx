@@ -8,9 +8,6 @@ function App() {
 
   return (
     <WeatherProvider>
-      <header>
-        <HeaderContainer/>
-      </header>
       <main>
         <WeatherContainer/>
       </main>

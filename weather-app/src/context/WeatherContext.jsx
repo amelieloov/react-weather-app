@@ -7,6 +7,7 @@ export const WeatherProvider = ({ children }) => {
     const [location, setLocation] = useState("");
     const [fetchError, setFetchError] = useState(null);
     const [showList, setShowList] = useState(false);
+    const [currentWeather, setCurrentWeather] = useState({});
     
     const [isFavorite, setIsFavorite] = useState(() => {
         const savedIsFavorite = localStorage.getItem("isFavorite");
@@ -29,7 +30,9 @@ export const WeatherProvider = ({ children }) => {
         isFavorite,
         setIsFavorite, 
         showList,
-        setShowList
+        setShowList,
+        currentWeather,
+        setCurrentWeather
     }}>
         {children}
     </WeatherContext.Provider>)

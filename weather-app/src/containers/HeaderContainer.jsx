@@ -1,32 +1,31 @@
 import CurrentWeatherItem from '../components/CurrentWeatherItem/CurrentWeatherItem.jsx';
-import { useState, useEffect } from 'react';
-import { GetCurrentWeather, GetUserPosition } from '../services/WeatherService.js';
+import { useState, useEffect, useContext } from 'react';
+import { WeatherContext } from '../context/WeatherContext.jsx';
+import { GetCurrentWeather } from '../services/WeatherService.js';
 
 const HeaderContainer = () => {
 
+  const {location} = useContext(WeatherContext);
   const [currentWeather, setCurrentWeather] = useState({});
 
   useEffect(() => {
-
-    const fetchWeather = async () => {
-      try {
-        const { lat, lon } = await GetUserPosition();
-        GetCurrentWeather({ lat, lon })
-          .then(data => {
-            setCurrentWeather(data)
-          });
-      } catch (error) {
-        GetCurrentWeather({ lat: 59.334591, lon: 18.063240 })
-          .then(data => {
-            setCurrentWeather(data)
-          });
-        console.error("Failed to get user position/weather data:", error);
-      }
-    };
-
-    fetchWeather();
-
+    fetchWeather("Stockholm");
   }, []);
+
+  // useEffect(() => {
+  //   fetchWeather(location);
+  // }, [location]);
+
+  const fetchWeather = async (city) => {
+    try {
+      GetCurrentWeather(city)
+        .then(data => {
+          setCurrentWeather(data)
+        });
+    } catch (error){
+      console.error("Failed to get user position/weather data:", error);
+    }
+  };
 
   return (<CurrentWeatherItem item={currentWeather} />)
 }
