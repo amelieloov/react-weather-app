@@ -1,7 +1,7 @@
 
 import { useContext, useEffect } from 'react';
 
-import { GetCurrentWeather, GetForecastByLatLon, GetLatLonByCityName, GetUserPosition } from '../services/WeatherService.js';
+import { GetCurrentWeather, GetForecastByLatLon, GetLatLonByCityName } from '../services/WeatherService.js';
 
 import { WeatherContext } from '../context/WeatherContext.jsx';
 import WeatherUI from '../components/WeatherUI/WeatherUI.jsx';
